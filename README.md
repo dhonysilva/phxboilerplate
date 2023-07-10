@@ -35,8 +35,9 @@ Para mais informações, consulte essa [`documentação`](https://docs.github.co
 #### Nova aplicação
 
 ```
-docker-compose run --rm phoenix mix phx.new . --app <nome da aplicação>
+docker-compose run --rm phoenix mix phx.new . --app <nome da aplicação> --binary-id
 ```
+O `--binary-id` altera a aplicação para gerar a chave primária com o formato UUID4 ao invés do padrão id to tipo inteiro.
 
 Uma mensagem de `Fetch and install dependencies` aparecerá. Selecione Yes.
 
@@ -100,18 +101,21 @@ docker-compose up
 
 Now we can visit [`localhost:4000`](http://localhost:4000) from our browser.
 
+Liste todos os conteineres em operação.
+```
+docker ps
+````
 
-Instruções que serão usadas especificamente durante a palestra no Meetup do dia 27/Abril/2013. Excluir após.
+Copie o Id do container dbt.
 
+Execute o comando abaixo para acessar o conteiner.
+```
+docker exec -it <container-id> /bin/bash
+````
 
-Criar o model User
+Criar o Accounts User
 
 ```
 docker-compose run --rm phoenix mix phx.gen.live Accounts User users name:string age:integer
 ```
-
-Criar o model Server
-
-```
-docker-compose run --rm phoenix mix phx.gen.live Servers Server servers name:string status:string deploy_count:integer size:float framework:string last_commit_message:string
-```
+Uma outra alternativa é criar o `phx.gen.auth`.
